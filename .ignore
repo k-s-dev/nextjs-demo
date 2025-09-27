@@ -1,0 +1,4 @@
+!.env*
+!**/notes.md
+!trials.js
+!trials.ts

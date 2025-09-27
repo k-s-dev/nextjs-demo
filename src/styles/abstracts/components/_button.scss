@@ -1,0 +1,102 @@
+@use "sass:map";
+
+@use "../variables/" as *;
+@use "../utilities/" as *;
+@use "../functions/" as *;
+
+@mixin btn-base(
+  $color-background: var(--color-1),
+  $color-background-disabled: var(--color-1-muted),
+  $color-text: var(--color-light),
+  $color-text-disabled: var(--color-2-muted),
+  $color-border: var(--color-1),
+  $font-size: var(--body-font-size),
+  $border: false,
+  $border-size: 0,
+  $border-radius: #{map.get($border-radius-sizes, 4)},
+  $padding-y: #{map.get($spacing, 2)},
+  $padding-x: #{map.get($spacing, 3)}
+) {
+  @if $border {
+    border: #{$border-size} solid #{$color-border};
+  } @else {
+    border: none;
+  }
+
+  &,
+  &:link,
+  &:visited {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #{$color-text};
+    background-color: #{$color-background};
+    border-radius: #{$border-radius};
+    padding: #{$padding-y} #{$padding-x};
+    font-size: #{$font-size};
+    text-align: center;
+    text-decoration: none;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-0.3rem);
+    box-shadow: #{$shadow-lg};
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(-0.1rem);
+    box-shadow: #{$shadow-lg};
+  }
+
+  &:disabled {
+    color: #{$color-text-disabled};
+    background-color: #{$color-background-disabled};
+  }
+}
+
+@mixin btn(
+  // 1, 2, 3, danger, warning, success
+  $color: 1,
+  // outline, filled
+  $variant: outline,
+  // 0-15 for font-size, border-size
+  $size: 4,
+  // 0-15 for spacing/padding
+  $padding-y: 1,
+  $padding-x: 2,
+) {
+  @if $variant == filled {
+    @include btn-base(
+      $color-background: var(--color-#{$color}-muted),
+      $color-text: var(--color-#{$color}-emphasis),
+      $color-background-disabled: var(--color-2-muted),
+      $color-text-disabled: var(--color-2-emphasis),
+      $color-border: var(--color-#{$color}),
+      $font-size: #{map.get($font-sizes, $size)},
+      $border: false,
+      $border-size: #{map.get($border-sizes, $size)},
+      $border-radius: #{map.get($border-radius-sizes, $size)},
+      $padding-y: #{map.get($spacing, $padding-y)},
+      $padding-x: #{map.get($spacing, $padding-x)}
+    );
+  }
+  @if $variant == outline {
+    @include btn-base(
+      $color-background: var(--body-background-color),
+      $color-text: var(--color-#{$color}-emphasis),
+      $color-background-disabled: var(--color-#{$color}-muted),
+      $color-text-disabled: var(--color-#{$color}-emphasis),
+      $color-border: var(--color-#{$color}),
+      $font-size: #{map.get($font-sizes, $size)},
+      $border: true,
+      $border-size: #{map.get($border-sizes, $size)},
+      $border-radius: #{map.get($border-radius-sizes, $size)},
+      $padding-y: #{map.get($spacing, $padding-y)},
+      $padding-x: #{map.get($spacing, $padding-x)}
+    );
+  }
+}

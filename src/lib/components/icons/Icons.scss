@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.icon {
+  background-color: transparent;
+  border: none;
+
+  &--edit {
+    color: var(--color-1);
+  }
+  &--delete {
+    color: var(--color-danger);
+  }
+}

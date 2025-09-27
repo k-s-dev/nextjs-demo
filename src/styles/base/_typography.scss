@@ -1,0 +1,65 @@
+@use "sass:map";
+
+@use "../abstracts" as *;
+
+body {
+  // include web font in html head
+  font-family: "Popins", system-ui, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: var(--body-font-size);
+  line-height: 1.7;
+}
+
+p {
+  &:not(:last-child) {
+    margin-bottom: #{map.get($spacing, 2)};
+  }
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.4;
+  margin-bottom: #{map.get($spacing, 1)};
+}
+
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  margin-bottom: #{map.get($spacing, 1)};
+}
+
+h1, h2, h3, h4, h5, h6, h7, h8 {
+  color: var(--color-2);
+}
+
+h1 {
+  font-size: #{map.get($font-sizes, 14)};
+  font-weight: 600;
+}
+
+h2 {
+  font-size: #{map.get($font-sizes, 12)};
+  font-weight: 600;
+}
+
+h3 {
+  font-size: #{map.get($font-sizes, 10)};
+  font-weight: 500;
+}
+
+h4 {
+  font-size: #{map.get($font-sizes, 8)};
+  font-weight: 400;
+}
+
+h5 {
+  font-size: #{map.get($font-sizes, 6)};
+  font-weight: 400;
+}
+
+h6 {
+  font-size: #{map.get($font-sizes, 5)};
+  font-weight: 400;
+}

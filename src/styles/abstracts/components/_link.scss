@@ -1,0 +1,27 @@
+@use "../variables/"  as *;
+
+@mixin link {
+  a.link {
+    outline-color: transparent;
+    padding: 2px 1px 0;
+    color: var(--color-3);
+    border-bottom: 1px solid #{$blue-500};
+  }
+
+  a.link:visited {
+    $color: success;
+    color: var(--color-#{$color});
+    border-bottom: 1px solid var(--color-#{$color});
+  }
+
+  a.link:hover,
+  a.link:focus {
+    color: var(--color-danger);
+    text-decoration: none;
+  }
+
+  a.link:active {
+    background: var(--color-danger-subtle);
+    color: var(--color-danger-emphasis);
+  }
+}

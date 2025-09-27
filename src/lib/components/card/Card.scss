@@ -1,0 +1,47 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  width: minmax(100%, fit-content);
+  padding: #{map.get($spacing, 3)};
+  margin: #{map.get($spacing, 2)} 0;
+
+  border: 2px solid var(--color-2);
+  border-radius: #{map.get($border-radius-sizes, 7)};
+
+  &-header {
+    margin-bottom: #{map.get($spacing, 3)};
+    border-bottom: 2px solid var(--color-2);
+    width: 100%;
+
+    h1 {
+      color: var(--color-1);
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--color-2);
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: #{map.get($spacing, 3)};
+  }
+
+  &-image-container {
+    position: relative;
+  }
+}
+

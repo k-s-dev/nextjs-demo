@@ -1,0 +1,13 @@
+@mixin row {
+  display: flex;
+
+  &--horizontal {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--vertical {
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+}

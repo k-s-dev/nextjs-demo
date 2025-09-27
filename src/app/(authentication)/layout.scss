@@ -1,0 +1,10 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.auth-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

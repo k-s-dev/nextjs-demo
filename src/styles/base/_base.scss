@@ -1,0 +1,73 @@
+@use "../abstracts/" as *;
+
+:root {
+  @include color-variables;
+  @include sizing-variables;
+  @include typography-variables;
+  @include image-variables;
+}
+
+*,
+*::before,
+*::after {
+  /* Creating animations while changing themes */
+  transition: background-color 0.3s, border 0.3s;
+}
+
+// Note: disabled for integration with ui library styling (mantine)
+html {
+  font-size: var(--html-font-size); // rem calculations are based on this
+}
+
+body {
+  color: var(--body-text-color);
+  background-color: var(--body-background-color);
+
+  transition: color 0.3s, background-color 0.3s;
+  min-height: 100vh;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+select:disabled,
+input:disabled {
+  background-color: var(--body-background-color);
+  color: var(--body-text-color);
+}
+
+button:has(svg) {
+  line-height: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+
+  /* For dark mode */
+  filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+}

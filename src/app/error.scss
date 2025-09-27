@@ -1,0 +1,32 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.error-page {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+    height: 50vh;
+    padding: #{map.get($spacing, 5)};
+    gap: #{map.get($spacing, 5)};
+
+    @include media-phone {
+      padding: #{map.get($spacing, 2)};
+    }
+  }
+
+  &-header {
+    color: var(--color-danger);
+  }
+
+  &-text {
+    font-size: #{map.get($font-sizes, 8)};
+  }
+
+  &-btn--reset {
+    @include btn(success);
+  }
+}

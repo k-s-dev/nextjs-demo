@@ -1,0 +1,44 @@
+@use "../abstracts/" as *;
+
+@mixin light-theme-variables {
+  --body-background-color: white;
+  --body-text-color: black;
+
+  --color-light: white;
+  --color-dark: black;
+
+  --color-1: #{$blue-500};
+  --color-1-muted: #{$blue-200};
+  --color-1-emphasis: #{$blue-800};
+
+  --color-2: #{$grey-600};
+  --color-2-muted: #{$grey-300};
+  --color-2-emphasis: #{$grey-900};
+
+  --color-3: #{$indigo-500};
+  --color-3-muted: #{$indigo-200};
+  --color-3-emphasis: #{$indigo-800};
+
+  --color-danger: #{$red-600};
+  --color-danger-muted: #{$red-200};
+  --color-danger-emphasis: #{$red-800};
+
+  --color-warning: #{$yellow-600};
+  --color-warning-muted: #{$yellow-200};
+  --color-warning-emphasis: #{$yellow-800};
+
+  --color-success: #{$green-600};
+  --color-success-muted: #{$green-200};
+  --color-success-emphasis: #{$green-800};
+}
+
+:root[data-theme="light"],
+.theme-light {
+  @include light-theme-variables;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @include light-theme-variables;
+  }
+}

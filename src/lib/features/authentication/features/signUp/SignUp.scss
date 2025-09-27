@@ -1,0 +1,35 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.signUp {
+  &-link-btn {
+    @include btn(1, filled);
+  }
+
+  &-success-message {
+    color: var(--color-success-emphasis);
+  }
+
+  &-signIn-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    @include media-phone {
+      flex-direction: column;
+    }
+  }
+
+  &-signIn-btn {
+    @include btn;
+  }
+
+  &-verification-notice {
+    font-size: #{map.get($font-sizes, 6)};
+    background-color: var(--color-1-muted);
+    color: var(--color-1-emphasis);
+    border-radius: #{map.get($border-radius-sizes, 4)};
+    padding: 0.5rem;
+  }
+}

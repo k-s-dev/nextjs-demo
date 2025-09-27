@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@use "../abstracts/" as *;
+
+.btn {
+  &-create {
+    height: 2rem;
+
+    @include btn(1, filled, 4);
+  }
+}

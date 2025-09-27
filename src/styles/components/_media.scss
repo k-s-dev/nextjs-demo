@@ -1,0 +1,118 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+@mixin visibility-on {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin visibility-off {
+  display: none;
+}
+
+.media-phone {
+  @include media-phone {
+    @include visibility-on;
+  }
+  @include media-phone-up {
+    @include visibility-off;
+  }
+}
+
+.media-tablet {
+  @include media-phone {
+    @include visibility-off;
+  }
+  @include media-tablet {
+    @include visibility-on;
+  }
+  @include media-tablet-up {
+    @include visibility-off;
+  }
+}
+
+.media-laptop {
+  @include media-tablet-down {
+    @include visibility-off;
+  }
+  @include media-laptop {
+    @include visibility-on;
+  }
+  @include media-laptop-up {
+    @include visibility-off;
+  }
+}
+
+.media-desktop {
+  @include media-laptop-down {
+    @include visibility-off;
+  }
+  @include media-desktop {
+    @include visibility-on;
+  }
+}
+
+.media-phone-up {
+  @include media-phone {
+    @include visibility-off;
+  }
+  @include media-phone-up {
+    @include visibility-on;
+  }
+}
+
+.media-tablet-up {
+  @include media-tablet-down {
+    @include visibility-off;
+  }
+  @include media-tablet-up {
+    @include visibility-on;
+  }
+}
+
+.media-laptop-up {
+  @include media-laptop-down {
+    @include visibility-off;
+  }
+  @include media-laptop-up {
+    @include visibility-on;
+  }
+}
+
+.media-desktop-up {
+  @include media-desktop-down {
+    @include visibility-off;
+  }
+  @include media-desktop {
+    @include visibility-on;
+  }
+}
+
+.media-tablet-down {
+  @include media-tablet-down {
+    @include visibility-on;
+  }
+  @include media-tablet-up {
+    @include visibility-off;
+  }
+}
+
+.media-laptop-down {
+  @include media-laptop-down {
+    display: block;
+  }
+  @include media-laptop-up {
+    @include visibility-off;
+  }
+}
+
+.media-desktop-down {
+  @include media-desktop-down {
+    @include visibility-on;
+  }
+  @include media-desktop {
+    @include visibility-off;
+  }
+}

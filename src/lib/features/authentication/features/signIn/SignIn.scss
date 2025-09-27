@@ -1,0 +1,24 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.signIn {
+  &-link-btn {
+    @include btn(success, filled);
+  }
+
+  &-signUp-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: #{map.get($spacing, 2)};
+
+    @include media-phone {
+      flex-direction: column;
+    }
+  }
+
+  &-signUp-btn {
+    @include btn(success, outline, 5);
+  }
+}

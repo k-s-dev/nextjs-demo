@@ -1,0 +1,20 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.auth-provider-icon-row {
+  display: flex;
+  gap: #{map.get($spacing, 2)};
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+// .auth-provider-icon-form { }
+
+.auth-provider-icon-btn {
+  @include btn($color: 1, $variant: outline);
+}
+
+.auth-provider-icon {
+  font-size: #{map.get($font-sizes, 9)};
+}

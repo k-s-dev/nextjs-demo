@@ -1,0 +1,10 @@
+@use "sass:map";
+@use "../../functions" as *;
+
+$max-steps: 16;
+
+$font-sizes: generate-sass-variable-space(0.2rem);
+$line-heights: generate-sass-variable-space(0.25);
+$border-sizes: generate-sass-variable-space(0.02rem);
+$border-radius-sizes: generate-sass-variable-space(0.1rem);
+$spacing: generate-sass-variable-space(0.25rem);

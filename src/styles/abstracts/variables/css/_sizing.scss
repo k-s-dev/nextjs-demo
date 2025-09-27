@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "sass:math";
+
+@use "../sass" as *;
+@use "../../mixins" as *;
+
+@mixin sizing-variables {
+  // rem calculations are based on html font size
+  --html-font-size: 100%;
+  --body-font-size: #{map.get($font-sizes, 5)}; // ~ 16px
+}

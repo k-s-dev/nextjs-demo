@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.admin-sidebar {
+  background-color: var(--color-warning);
+
+  &-table-link-list {
+    padding-left: #{map.get($spacing, 2)};
+  }
+}

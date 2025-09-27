@@ -1,0 +1,88 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.nav {
+  font-size: #{map.get($font-sizes, 6)};
+  color: var(--color-success-emphasis);
+  background-color: var(--color-light);
+
+  &-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    padding: #{map.get($spacing, 2)};
+    border-bottom: 1px solid var(--color-2);
+
+    @include media-phone {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-left,
+  &-center,
+  &-right {
+    display: flex;
+    align-items: center;
+    gap: #{map.get($spacing, 4)};
+  }
+
+  &-left {
+    justify-self: flex-start;
+  }
+
+  &-center {
+    justify-self: center;
+  }
+
+  &-right {
+    justify-self: flex-end;
+  }
+
+  &-links,
+  &-toggle_theme,
+  &-toggle_theme-icon-selected {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: #{map.get($spacing, 2)};
+  }
+
+  &-links {
+    gap: #{map.get($spacing, 4)};
+  }
+
+  &-link {
+    &:hover,
+    &-active {
+      color: var(--color-danger);
+    }
+  }
+
+  &-toggle_theme-icon-selected {
+    cursor: pointer;
+  }
+
+  &-theme-name {
+    text-transform: capitalize;
+  }
+
+  &-user {
+    &-not_signed_in-container {
+      display: flex;
+      align-items: center;
+      gap: #{map.get($spacing, 2)};
+    }
+
+    &-name {
+      border-bottom: 1px solid var(--color-dark);
+    }
+  }
+}
+
+.nav-phone-search_wrapper {
+  position: sticky;
+  top: 5rem;
+}

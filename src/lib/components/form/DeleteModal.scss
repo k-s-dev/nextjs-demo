@@ -1,0 +1,37 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.delete-modal {
+  &-section h4 {
+    color: var(--color-danger);
+  }
+
+  &-identifier {
+    font-weight: bold;
+  }
+
+  &-resource, &-identifier {
+    font-weight: bold;
+  }
+
+  &-highlight {
+    color: var(--color-danger);
+  }
+
+  &-btn {
+    &-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: #{map.get($spacing, 2)};
+    }
+
+    &--confirm {
+      @include btn(danger, outline)
+    }
+
+    &--cancel {
+      @include btn(success, outline)
+    }
+  }
+}

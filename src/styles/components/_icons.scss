@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@use "../abstracts/" as *;
+
+.icon {
+  &--copy {
+    background-color: transparent;
+    color: var(--color-2);
+    border: none;
+  }
+}

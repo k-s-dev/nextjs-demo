@@ -1,0 +1,28 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
+
+.text {
+  font-size: 2rem;
+  background-color: var(--color-warning-muted);
+  padding: 2rem;
+  border-radius: 1rem;
+
+  &-valid {
+    color: var(--color-success-emphasis);
+  }
+
+  &-invalid {
+    color: var(--color-danger);
+  }
+
+  &-highlight {
+    font-weight: bolder;
+  }
+}
