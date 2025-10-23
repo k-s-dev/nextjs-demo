@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.editIcon {
+  color: var(--color-1);
+}
+
+.backIcon {
+  color: var(--color-warning);
+}

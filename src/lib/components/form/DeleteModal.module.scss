@@ -1,0 +1,35 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.resource,
+.identifier {
+  font-weight: bold;
+}
+
+.highlight {
+  color: var(--color-danger);
+}
+
+.button {
+  &Row {
+    display: flex;
+    justify-content: flex-end;
+    gap: fn-space(2);
+  }
+
+  &Icon {
+    background: none;
+    background-color: transparent;
+    border: none;
+  }
+
+  &Confirm {
+    @include btn(danger, outline);
+  }
+
+  &Cancel {
+    @include btn(success, outline);
+  }
+}
+

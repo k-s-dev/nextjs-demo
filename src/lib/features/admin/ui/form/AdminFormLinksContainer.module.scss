@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.buttonsRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: fn-space(2);
+
+  @include media-phone {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

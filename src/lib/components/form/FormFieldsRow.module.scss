@@ -1,0 +1,14 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.fieldsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: fn-space(5);
+  justify-content: center;
+
+  @include media-phone {
+    grid-template-columns: 1fr;
+  }
+}

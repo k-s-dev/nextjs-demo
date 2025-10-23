@@ -1,0 +1,9 @@
+@use "sass:map";
+
+@function generate-sass-variable-space($spacer, $max-steps: 16) {
+  $new-map: ();
+  @for $step from 0 to $max-steps {
+    $new-map: map.set($new-map, $step, calc($spacer * $step));
+  }
+  @return $new-map;
+}

@@ -1,0 +1,29 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.container {
+  justify-self: center;
+  font-size: fn-font-size(6);
+  margin-bottom: fn-space(2);
+  padding: fn-space(1) fn-space(2);
+  border-radius: fn-border-radius-size(4);
+}
+
+.header,
+.list {
+  margin-bottom: fn-space(2);
+}
+
+.item {
+  text-align: left;
+}
+
+.error {
+  color: var(--color-danger);
+  background-color: var(--color-warning-muted);
+}
+
+.message {
+  color: var(--color-success-emphasis);
+}

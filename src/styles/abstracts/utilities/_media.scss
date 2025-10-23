@@ -1,0 +1,61 @@
+// breakpoints
+// phone:     0     >= width < 600px
+// tablet:  600px   >= width < 900px
+// laptop:  900px   >= width < 1200px
+// desktop: 1200px  >= width
+
+// only
+@mixin media-phone {
+  @media (0 <= width < 600px) {
+    @content;
+  }
+}
+@mixin media-tablet {
+  @media (600px <= width < 900px) {
+    @content;
+  }
+}
+@mixin media-laptop {
+  @media (900px <= width < 1200px) {
+    @content;
+  }
+}
+@mixin media-desktop {
+  @media (1200px <= width) {
+    @content;
+  }
+}
+
+// up
+@mixin media-phone-up {
+  @media (width >= 600px) {
+    @content;
+  }
+}
+@mixin media-tablet-up {
+  @media (width >= 900px) {
+    @content;
+  }
+}
+@mixin media-laptop-up {
+  @media (width >= 1200px) {
+    @content;
+  }
+}
+
+// down
+@mixin media-tablet-down {
+  @media (width < 900px) {
+    @content;
+  }
+}
+@mixin media-laptop-down {
+  @media (width < 1200px) {
+    @content;
+  }
+}
+@mixin media-desktop-down {
+  @media (width < 1800px) {
+    @content;
+  }
+}

@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "@/styles/abstracts" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: fn-space(2);
+
+  @include media-phone {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

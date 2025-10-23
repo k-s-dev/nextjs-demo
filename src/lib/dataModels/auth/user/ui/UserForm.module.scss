@@ -1,0 +1,7 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.successMessage {
+  color: var(--color-success-emphasis);
+}

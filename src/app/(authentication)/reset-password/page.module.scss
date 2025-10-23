@@ -1,0 +1,14 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.text {
+  font-size: 2rem;
+  background-color: var(--color-warning-muted);
+  padding: 2rem;
+  border-radius: 1rem;
+
+  &-invalid {
+    color: var(--color-danger);
+  }
+}

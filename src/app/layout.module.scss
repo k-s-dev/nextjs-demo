@@ -1,0 +1,19 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.rootContainer {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  @include media-tablet-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.header {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
