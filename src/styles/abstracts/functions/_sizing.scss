@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "../variables/sass/" as *;
+
+@function fn-font-size($level) {
+  @return map.get($font-sizes, $level);
+}
+
+@function fn-line-height($level) {
+  @return map.get($line-heights, $level);
+}
+
+@function fn-border-size($level) {
+  @return map.get($border-sizes, $level);
+}
+
+@function fn-border-radius-size($level) {
+  @return map.get($border-radius-sizes, $level);
+}
+
+@function fn-space($level) {
+  @return map.get($spacing, $level);
+}

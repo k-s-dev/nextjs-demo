@@ -1,0 +1,22 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.rootContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  height: 50vh;
+  gap: fn-space(5);
+  padding: fn-space(5);
+
+  @include media-phone {
+    padding: fn-space(2);
+  }
+}
+
+.backButton {
+  @include btn;
+}

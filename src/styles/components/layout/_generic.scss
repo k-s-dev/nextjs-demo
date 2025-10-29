@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "../../abstracts/" as *;
+
+.page-container {
+  @extend %text-center;
+
+  min-height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: fn-space(4);
+  padding: fn-space(2) 0;
+}
+

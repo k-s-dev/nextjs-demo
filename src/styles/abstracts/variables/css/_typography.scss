@@ -1,0 +1,9 @@
+@use "sass:map";
+
+@use "../sass" as *;
+@use "../../mixins" as *;
+@use "../../functions" as *;
+
+@mixin typography-variables {
+  --line-height-base: fn-line-height(6);
+}

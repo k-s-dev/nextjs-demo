@@ -1,0 +1,14 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.tableLinks {
+  font-size: 1.2rem;
+  padding-left: fn-space(2);
+}
+
+.link {
+  & span {
+    font-size: 1.2rem;
+  }
+}

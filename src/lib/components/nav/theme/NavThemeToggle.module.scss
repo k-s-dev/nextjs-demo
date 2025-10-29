@@ -1,0 +1,12 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+
+.triggerIcon {
+  cursor: pointer;
+}
+
+.name {
+  text-transform: capitalize;
+}
