@@ -1,6 +1,9 @@
 @use "sass:map";
 @use "../../functions/generators" as *;
 
+// NOTE: nav height
+$nav-height: 57.5px;
+
 $font-sizes: generate-sass-variable-space(0.2rem);
 $line-heights: generate-sass-variable-space(0.25);
 $border-sizes: generate-sass-variable-space(0.02rem);

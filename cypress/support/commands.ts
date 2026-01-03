@@ -11,8 +11,6 @@ Cypress.Commands.add("confirmSignIn", (email, password) => {
   cy.getByData("signIn-btn").click();
   cy.intercept("POST", "api/auth/sign-in/email").as("signInRequest");
   cy.intercept("GET", "api/auth/get-session").as("sessionRequest");
-  cy.wait("@signInRequest", { timeout: 10000 });
-  cy.wait("@sessionRequest", { timeout: 20000 });
   cy.getByData("nav-user-avatar").should("be.visible");
 });
 

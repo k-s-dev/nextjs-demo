@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useActionState, useState } from "react";
+import { useActionState, useState } from "react";
 import { Divider } from "@mantine/core";
-import FormError from "@/lib/components/form/FormError";
-import FormMessage from "@/lib/components/form/FormMessage";
 import {
   MODEL_NAME,
   TUserFormState,
@@ -18,6 +16,7 @@ import AdminUpdateFormLinks, {
   IAdminUpdateFormLinksProps,
 } from "@/lib/features/admin/ui/form/update/AdminUpdateFormLinks";
 import AdminUpdateFormHeader from "@/lib/features/admin/ui/form/update/AdminUpdateFormHeader";
+import FormMessages from "@/lib/ui/form/FormMessages";
 
 export default function UserUpdateForm({
   user,
@@ -55,8 +54,8 @@ export default function UserUpdateForm({
         setImageFileAction={setImageFile}
         initialImageUrl={user.image}
       />
-      <FormError errors={formState.errors?.root} />
-      <FormMessage messages={formState.messages} />
+      <FormMessages error messages={formState.errors?.root} />
+      <FormMessages messages={formState.messages} />
       <Divider size="md" my="sm" />
       <AdminUpdateFormLinks {...linksProps} />
     </AdminFormContainer>

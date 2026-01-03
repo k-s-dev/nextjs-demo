@@ -1,4 +1,6 @@
-# Nextjs starter template
+# Nextjs Demo
+
+> WIP: this is work in progress for demonstration, not fit for production use as is.
 
 ## Stack & Features
 
@@ -65,7 +67,7 @@ Refer to below links for more details.
 npm install
 ```
 
-- Note: with `package-lock.json`, `npm install` should work fine. Without it there might be [issue  while installing cypress.](https://github.com/cypress-io/cypress/issues/29204)
+- Note: with `package-lock.json`, `npm install` should work fine. Without it there might be [issue while installing cypress.](https://github.com/cypress-io/cypress/issues/29204)
 - Solution: If you are installing latest versions without `package-lock.json` then
   - install `cypress` first: `npm install cypress@latest --save-dev --ignore-scripts`
   - then `npm i` as usual
@@ -82,7 +84,7 @@ npm run dev:db:migrate
 
 ### Run server
 
-Refer to `package.json` for npm scripts to run for dev, test and production. e.g. 
+Refer to `package.json` for npm scripts to run for dev, test and production. e.g.
 
 ```bash
 npm run dev

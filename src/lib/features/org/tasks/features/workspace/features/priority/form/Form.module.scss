@@ -1,0 +1,13 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.formContainer,
+.headerContainer {
+  display: grid;
+  grid-template-columns: 1fr 5fr 2fr 2fr 2fr repeat(3, 3fr);
+  gap: fn-space(2);
+  align-items: start;
+  min-width: 600px;
+}
+

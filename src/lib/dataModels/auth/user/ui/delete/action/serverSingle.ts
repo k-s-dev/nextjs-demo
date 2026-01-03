@@ -2,7 +2,7 @@
 
 import { deleteUser } from "../../../dataAccessControl";
 import { getSessionUser } from "@/lib/features/authentication/getSessionUser";
-import { TServerResponsePromise } from "@/lib/utils/types";
+import { TServerResponsePromise } from "@/lib/types/serverResponse";
 
 export async function deleteUserServerAction(
   id?: string,

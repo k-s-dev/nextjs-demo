@@ -1,45 +1,28 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-import { globalIgnores } from "@eslint/config-helpers";
-import nextEnv from "@next/env";
+import { defineConfig, globalIgnores } from "@eslint/config-helpers";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+import safeql from "@ts-safeql/eslint-plugin/config";
+import pkg from "@next/env";
+const { loadEnvConfig } = pkg;
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const env = nextEnv.loadEnvConfig(__dirname, true);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  globalIgnores(["src/generated/**/*"]),
-  ...compat.config({
-    extends: ["next/core-web-vitals", "next/typescript"],
-    plugins: ["@ts-safeql/eslint-plugin"],
-    parserOptions: {
-      project: "./tsconfig.json",
-    },
-    rules: {
-      "@ts-safeql/check-sql": [
-        "error",
-        {
-          connections: [
-            {
-              connectionUrl: env.combinedEnv.DATABASE_URL,
-              migrationsDir: "./src/database/migrations",
-              targets: [
-                {
-                  tag: "prisma.+($queryRaw|$executeRaw)",
-                  transform: "{type}[]",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "envConfig.ts",
+  ]),
+  safeql.configs.connections({
+    databaseUrl: process.env.DATABASE_URL,
+    targets: [{ tag: "sql" }],
   }),
-];
+]);
 
 export default eslintConfig;

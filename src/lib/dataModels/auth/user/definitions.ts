@@ -60,6 +60,7 @@ export type TUserListPrisma = Prisma.Result<
   "findMany"
 >;
 
+export type TSignInFormAction = "signIn" | "reset" | "verify";
 export const VSUserFormStateData = v.omit(VSUserBase, ["id"]);
 // export type TUserForm = v.InferInput<typeof VSUserFormStateData>;
 export type TUserFormStateData = v.InferInput<typeof VSUserFormStateData>;
@@ -70,6 +71,8 @@ export type TUserFormState = {
   data?: TUserFormStateData;
   errors?: TUserFormStateErrors;
   messages?: string[];
+  action?: TSignInFormAction;
+  touched?: boolean;
 };
 
 // admin: User crud forms
@@ -80,3 +83,4 @@ export const VSUserCrudForm = v.omit(v.required(VSUser, ["email", "name"]), [
 ]);
 
 export type TUserCrudForm = v.InferInput<typeof VSUserCrudForm>;
+

@@ -3,9 +3,14 @@
 import * as v from "valibot";
 import { VSSignInForm } from "../../definitions";
 import { parseFormData } from "@/lib/utils/form";
-import { TUserFormState, TUserPublic } from "@/lib/dataModels/auth/user/definitions";
+import {
+  TUserFormState,
+  TUserPublic,
+} from "@/lib/dataModels/auth/user/definitions";
 import { getUserByEmail } from "@/lib/dataModels/auth/user/dataAccessControl";
 import { auth } from "@/lib/features/authentication/auth";
+import { redirect } from "next/navigation";
+import { routes } from "@/lib/utils/routeMapper";
 
 export async function credentialsSignInActionServer(
   prevState: TUserFormState | null,
@@ -21,6 +26,8 @@ export async function credentialsSignInActionServer(
   if (!validationResult.success) {
     const errors = v.flatten<typeof VSSignInForm>(validationResult.issues);
     return {
+      touched: true,
+      action: "signIn",
       data: parsedFormData,
       errors: errors,
     };
@@ -37,6 +44,8 @@ export async function credentialsSignInActionServer(
   // validate: existing user
   if (!user) {
     return {
+      touched: true,
+      action: "signIn",
       data: parsedFormData,
       errors: {
         root: ["Invalid credentials."],
@@ -47,6 +56,8 @@ export async function credentialsSignInActionServer(
   // validate: verification status
   if (!user?.emailVerified) {
     return {
+      touched: true,
+      action: "signIn",
       data: parsedFormData,
       errors: {
         root: ["Email is not verified yet."],
@@ -56,7 +67,7 @@ export async function credentialsSignInActionServer(
 
   // validate: password: handled by better-auth
   // session management
-  await auth.api.signInEmail({
+  const authResponse = await auth.api.signInEmail({
     body: {
       email: apiSubmissionData.email,
       password: apiSubmissionData.password,
@@ -64,8 +75,16 @@ export async function credentialsSignInActionServer(
     asResponse: true,
   });
 
-  return {
-    status: "success",
-    data: { ...validationResult.output },
-  };
+  if (authResponse.status !== 200) {
+    return {
+      touched: true,
+      action: "signIn",
+      data: parsedFormData,
+      errors: {
+        root: ["Invalid credentials."],
+      },
+    };
+  }
+
+  redirect(routes.DEFAULT_LOGIN_REDIRECT);
 }

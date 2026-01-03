@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { ERROR_MESSAGES } from "@/lib/constants/others";
 import { routes } from "@/lib/utils/routeMapper";
 
 beforeEach(() => {
@@ -20,7 +21,7 @@ describe("admin.user.create flow", () => {
     cy.visit(routes.authentication.signIn);
     cy.confirmSignIn("test-user-02@example.com", "12345678");
     cy.visit(routes.admin.user.create);
-    cy.contains("Unauthorized").should("exist");
+    cy.contains(ERROR_MESSAGES.unauthorized).should("exist");
   });
 
   it(

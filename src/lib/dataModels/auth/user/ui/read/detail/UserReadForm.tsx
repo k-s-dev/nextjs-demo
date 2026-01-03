@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useActionState, useState } from "react";
-import { Divider } from "@mantine/core";
-import FormError from "@/lib/components/form/FormError";
-import FormMessage from "@/lib/components/form/FormMessage";
+import { useActionState, useState } from "react";
+import { Divider, Text } from "@mantine/core";
 import { routes } from "@/lib/utils/routeMapper";
 import {
   MODEL_NAME,
@@ -18,6 +16,7 @@ import AdminReadFormHeader, {
   IAdminReadFormHeaderProps,
 } from "@/lib/features/admin/ui/form/read/AdminReadFormHeader";
 import AdminReadFormLinks from "@/lib/features/admin/ui/form/read/AdminReadFormLinks";
+import FormMessages from "@/lib/ui/form/FormMessages";
 
 export default function UserReadForm({
   user,
@@ -49,7 +48,9 @@ export default function UserReadForm({
     modelName: MODEL_NAME,
     editHref: routes.admin.user.withId(user.id, "update"),
     backHref: routes.admin.user.read,
-    identifier: user.email,
+    deleteModalContent: (
+      <Text>User: {user.email} will be deleted permanently.</Text>
+    ),
     deleteAction: async () => await deleteUserServerAction(user.id),
   };
 
@@ -65,8 +66,8 @@ export default function UserReadForm({
         initialImageUrl={user.image}
         inert
       />
-      <FormError errors={formState.errors?.root} />
-      <FormMessage messages={formState.messages} />
+      <FormMessages error messages={formState.errors?.root} />
+      <FormMessages messages={formState.messages} />
       <Divider size="md" my="sm" />
       <AdminReadFormLinks {...adminLinksProps} />
     </AdminFormContainer>

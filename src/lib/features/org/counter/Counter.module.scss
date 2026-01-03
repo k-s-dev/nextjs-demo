@@ -1,0 +1,13 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.container {
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

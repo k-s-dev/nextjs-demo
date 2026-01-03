@@ -1,11 +1,11 @@
 "use client";
 
-import React, { Dispatch, SetStateAction } from "react";
-import { InputImage } from "@/lib/components/form/fields/InputImage";
+import { Dispatch, SetStateAction } from "react";
+import { InputImage } from "@/lib/ui/form/fields/InputImage";
 import { UserEmail, UserName, UserRole, UserEmailVerified } from "./Fields";
 import { TUserFormState } from "../definitions";
-import FormFieldsRow from "@/lib/components/form/FormFieldsRow";
-import Form from "@/lib/components/form/Form";
+import FormFieldsRow from "@/lib/ui/form/FormFieldsRow";
+import Form from "@/lib/ui/form/Form";
 
 export function UserForm({
   formId,

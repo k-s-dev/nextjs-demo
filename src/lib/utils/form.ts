@@ -40,3 +40,7 @@ export function parseFormData(args: {
 
   return parsedFormData;
 }
+
+export function prepareValibotErrors(errors: string[]) {
+  return errors as [string, ...string[]]
+}

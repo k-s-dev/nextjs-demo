@@ -1,13 +1,11 @@
 "use client";
 
-import * as dtStyles from "@/lib/components/table/DataTable.module.scss";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import { DataTable } from "@/lib/components/table/DataTable";
+import { DataTableWrapper } from "@/lib/ui/table/DataTable";
 import { useMemo, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
-import { Anchor, Tooltip } from "@mantine/core";
-import clsx from "clsx";
+import { Anchor, Flex, Tooltip } from "@mantine/core";
 import { IAdminModelInfo } from "../adminModelList";
 
 export function AdminTable({ modelList }: { modelList: IAdminModelInfo[] }) {
@@ -22,7 +20,7 @@ export function AdminTable({ modelList }: { modelList: IAdminModelInfo[] }) {
         header: "Name",
         cell: (props) => {
           return (
-            <div className={dtStyles.default.cell}>
+            <Flex gap={"xs"} align={"center"}>
               <Anchor
                 component={Link}
                 href={props.row.original.href}
@@ -33,14 +31,15 @@ export function AdminTable({ modelList }: { modelList: IAdminModelInfo[] }) {
                 {props.getValue()}
               </Anchor>
               <Tooltip label={`Add ${props.row.original.name}`}>
-                <Link
+                <Anchor
+                  component={Link}
                   href={`${props.row.original.rootPath}/create`}
-                  className={clsx("link", dtStyles.default.cellIcon)}
+                  c={"blue.7"}
                 >
                   <FaPlus />
-                </Link>
+                </Anchor>
               </Tooltip>
-            </div>
+            </Flex>
           );
         },
         sortingFn: "alphanumeric",
@@ -50,9 +49,7 @@ export function AdminTable({ modelList }: { modelList: IAdminModelInfo[] }) {
         accessorKey: "category",
         id: "category",
         header: "Category",
-        cell: (info) => (
-          <div className={dtStyles.default.cell}>{info.getValue()}</div>
-        ),
+        cell: (info) => <span>{info.getValue()}</span>,
         sortingFn: "alphanumeric",
         sortDescFirst: true,
       },
@@ -60,11 +57,7 @@ export function AdminTable({ modelList }: { modelList: IAdminModelInfo[] }) {
         accessorKey: "count",
         id: "count",
         header: "Count",
-        cell: (info) => (
-          <div className={dtStyles.default.cell}>
-            {info.getValue().toString()}
-          </div>
-        ),
+        cell: (info) => <span>{info.getValue().toString()}</span>,
         meta: {
           filterVariant: "range",
         },
@@ -73,10 +66,10 @@ export function AdminTable({ modelList }: { modelList: IAdminModelInfo[] }) {
   }, []);
 
   return (
-    <DataTable
+    <DataTableWrapper
       key="admin-table"
-      columns={columns}
       data={data}
+      columns={columns}
       tableProps={{ fz: "xl" }}
     />
   );

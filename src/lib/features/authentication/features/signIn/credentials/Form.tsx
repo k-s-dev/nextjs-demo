@@ -1,117 +1,79 @@
 "use client";
 
-import React, { useActionState, useEffect, useState } from "react";
-import { redirect, useSearchParams } from "next/navigation";
-import FormError from "@/lib/components/form/FormError";
-import FormMessage from "@/lib/components/form/FormMessage";
+import { useActionState, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
+  TSignInFormAction,
   TUserFormState,
-  TUserFormStateData,
 } from "@/lib/dataModels/auth/user/definitions";
 import { signInActionClient } from "./action/client";
 import { credentialsSignInActionServer } from "./action/server/signIn";
 import { sendVerificationLinkActionServer } from "./action/server/sendVerficationLink";
 import { VSSignInForm, VSSignInFormBase } from "./definitions";
 import { UserEmail, UserPassword } from "@/lib/dataModels/auth/user/ui/Fields";
-import { routes } from "@/lib/utils/routeMapper";
-import Form from "@/lib/components/form/Form";
+import Form from "@/lib/ui/form/Form";
 import { Button } from "@mantine/core";
-import { authClient } from "../../../auth-client";
 import { sendResetPasswordLinkActionServer } from "./action/server/sendResetPasswordLink";
+import FormMessages from "@/lib/ui/form/FormMessages";
 
 export default function CredentialsSignInForm({
+  initialState,
+  resetAction,
   formId = "signIn-form",
 }: CredentialsSigninProps) {
-  const [formState, setFormState] = useState<TUserFormState>({});
-  const [isPending, setIsPending] = useState(false);
   const searchParams = useSearchParams();
+  const [actionName, setActionName] = useState<TSignInFormAction | null>(null);
 
-  const initialFormData = {} as TUserFormStateData;
-
-  const initialFormState: TUserFormState = {
-    data: initialFormData,
-  };
-
-  const [formStateSignIn, signInAction, isPendingSignIn] = useActionState(
-    signInActionClient.bind(null, credentialsSignInActionServer, VSSignInForm),
-    initialFormState,
+  const [signInFormState, signInAction, isPendingSignIn] = useActionState(
+    signInActionClient.bind(
+      null,
+      credentialsSignInActionServer,
+      VSSignInForm,
+      "signIn",
+      setActionName,
+    ),
+    { ...initialState, action: "signIn" },
   );
 
-  const [formStateResetPassword, resetPasswordAction, isPendingResetPassword] =
-    useActionState(
-      signInActionClient.bind(
-        null,
-        sendResetPasswordLinkActionServer,
-        VSSignInFormBase,
-      ),
-      initialFormState,
-    );
+  const [resetFormState, resetPasswordAction, isPendingReset] = useActionState(
+    signInActionClient.bind(
+      null,
+      sendResetPasswordLinkActionServer,
+      VSSignInFormBase,
+      "reset",
+      setActionName,
+    ),
+    { ...initialState, action: "reset" },
+  );
 
   const [
-    formStateSendVerificationLink,
+    verificationFormState,
     sendVerificationEmailFormAction,
-    isPendingSendVerificationLink,
+    isPendingVerification,
   ] = useActionState(
     signInActionClient.bind(
       null,
       sendVerificationLinkActionServer,
       VSSignInFormBase,
+      "verify",
+      setActionName,
     ),
-    initialFormState,
+    { ...initialState, action: "verify" },
   );
 
-  useEffect(() => {
-    setIsPending(isPendingSignIn);
-    setFormState(formStateSignIn);
-  }, [formStateSignIn, isPendingSignIn]);
-
-  useEffect(() => {
-    setIsPending(isPendingSendVerificationLink);
-    setFormState(formStateSendVerificationLink);
-  }, [formStateSendVerificationLink, isPendingSendVerificationLink]);
-
-  useEffect(() => {
-    setIsPending(isPendingResetPassword);
-    setFormState(formStateResetPassword);
-  }, [formStateResetPassword, isPendingResetPassword]);
-
-  const formErrors = [];
+  const knownErrors: string[] = [];
   if (searchParams.get("error") === "OAuthAccountNotLinked") {
-    formErrors.push(`Email already registered with another provider.`);
-    formErrors.push(`Use the initial provier used to sign in.`);
-  }
-  if (Array.isArray(formState.errors?.root)) {
-    formErrors.push(...formState.errors?.root);
-  } else if (formState.errors?.root) {
-    formErrors.push(formState.errors?.root);
+    knownErrors.push(`Email already registered with another provider.`);
+    knownErrors.push(`Use the initial provier used to sign in.`);
   }
 
-  useEffect(() => {
-    async function signIn() {
-      if (
-        formState.status === "success" &&
-        formState.data?.email &&
-        formState.data.password
-      ) {
-        const { error } = await authClient.signIn.email({
-          email: formState.data?.email,
-          password: formState.data?.password,
-          callbackURL: routes.DEFAULT_LOGIN_REDIRECT,
-        });
-        if (error) {
-          formState.status = "error";
-          formState.errors = {
-            root: [error.message || ""],
-          };
-
-          return formState;
-        }
-
-        return redirect(routes.DEFAULT_LOGIN_REDIRECT);
-      }
-    }
-    signIn();
-  }, [formState]);
+  let formState: TUserFormState = initialState;
+  if (signInFormState.touched && actionName === "signIn")
+    formState = signInFormState;
+  if (resetFormState.touched && actionName === "reset")
+    formState = resetFormState;
+  if (verificationFormState.touched && actionName === "verify")
+    formState = verificationFormState;
 
   return (
     <>
@@ -132,7 +94,7 @@ export default function CredentialsSignInForm({
           type="submit"
           form={formId}
           formAction={signInAction}
-          disabled={isPending}
+          disabled={isPendingSignIn || isPendingReset || isPendingVerification}
           color="green.1"
           data-test-cy="signIn-btn"
         >
@@ -143,7 +105,7 @@ export default function CredentialsSignInForm({
           type="submit"
           form={formId}
           formAction={sendVerificationEmailFormAction}
-          disabled={isPending}
+          disabled={isPendingSignIn || isPendingReset || isPendingVerification}
           color="gray.2"
           fullWidth
           data-test-cy="send_verification_link_email-btn"
@@ -155,20 +117,38 @@ export default function CredentialsSignInForm({
           type="submit"
           form={formId}
           formAction={resetPasswordAction}
-          disabled={isPending}
+          disabled={isPendingSignIn || isPendingReset || isPendingVerification}
           color="gray.2"
           fullWidth
           data-test-cy="reset_password-btn"
         >
           Reset Password
         </Button>
+
+        <Button
+          type="button"
+          fullWidth
+          variant="light"
+          color="gray"
+          onClick={() => {
+            resetAction();
+            // setActionName(null);
+            // setInitialState({ data: {} as TUserFormStateData, touched: false });
+          }}
+        >
+          Reset
+        </Button>
       </Form>
-      <FormError errors={formErrors} />
-      <FormMessage messages={formState.messages || []} />
+      {formState.errors?.root && (
+        <FormMessages error messages={formState.errors.root} />
+      )}
+      {formState.messages && <FormMessages messages={formState.messages} />}
     </>
   );
 }
 
 export interface CredentialsSigninProps {
+  initialState: TUserFormState;
+  resetAction: () => void;
   formId?: string;
 }

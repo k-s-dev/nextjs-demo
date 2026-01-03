@@ -1,6 +1,9 @@
 "use server";
 
-import { TDataRequestMode, TServerResponsePromise } from "@/lib/utils/types";
+import {
+  TDataRequestMode,
+  TServerResponsePromise,
+} from "@/lib/types/serverResponse";
 import { Prisma, USER_ROLE } from "@/generated/prisma/client";
 import { TUserPublic } from "./user/definitions";
 

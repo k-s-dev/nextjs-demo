@@ -1,33 +1,24 @@
 "use client";
 
-import * as dtStyles from "@/lib/components/table/DataTable.module.scss";
 import { TUserPublic } from "../definitions";
-import { useEffect, useMemo, useState } from "react";
-import { DataTable } from "@/lib/components/table/DataTable";
+import { useMemo } from "react";
+import { DataTableWrapper } from "@/lib/ui/table/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import TableCellWithCopy from "@/lib/components/table/TableCellWithCopy";
-import TableCell from "@/lib/components/table/TableCell";
+import TableCellWithCopy from "@/lib/ui/table/TableCellWithCopy";
 import { routes } from "@/lib/utils/routeMapper";
 import Link from "next/link";
-import CopyIcon from "@/lib/components/icons/CopyIcon";
+import CopyIcon from "@/lib/ui/icons/CopyIcon";
 import { deleteUserServerAction } from "./delete/action/serverSingle";
 import { deleteManyUsersServerAction } from "./delete/action/serverMany";
-import clsx from "clsx";
 import {
   generateCheckboxCell,
   generateCheckboxHeader,
-} from "@/lib/components/table/TableCheckbox";
-import { Anchor, Checkbox } from "@mantine/core";
-import { EditIcon } from "@/lib/components/icons/TooltipIcons";
-import DeleteModalIcon from "@/lib/components/form/DeleteModalIcon";
+} from "@/lib/ui/table/TableCheckbox";
+import { Anchor, Checkbox, Flex, Text } from "@mantine/core";
+import { EditIcon } from "@/lib/ui/icons/TooltipIcons";
+import DeleteModalIcon from "@/lib/ui/form/DeleteModalIcon";
 
 export function UserTable({ users }: { users: TUserPublic[] }) {
-  const [data, setData] = useState([...users]);
-
-  useEffect(() => {
-    setData([...users]);
-  }, [users]);
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns = useMemo<ColumnDef<TUserPublic, any>[]>(() => {
     return [
@@ -48,49 +39,46 @@ export function UserTable({ users }: { users: TUserPublic[] }) {
           return (
             <>
               {props.row.original && (
-                <>
-                  <TableCell
-                    className={clsx(
-                      dtStyles.default.cell,
-                      dtStyles.default.cellPrimary,
+                <Flex gap={"xs"} w={400}>
+                  <Anchor
+                    component={Link}
+                    href={routes.admin.user.withId(
+                      props.row.original.id,
+                      "detail",
+                    )}
+                    fz="lg"
+                    c="blue.7"
+                    underline="not-hover"
+                  >
+                    {props.getValue()}
+                  </Anchor>
+
+                  <CopyIcon copyText={props.getValue()} />
+                  <Link
+                    style={{ alignItems: "center", display: "inline-flex" }}
+                    href={routes.admin.user.withId(
+                      props.row.original.id,
+                      "update",
                     )}
                   >
-                    <Anchor
-                      component={Link}
-                      href={routes.admin.user.withId(
-                        props.row.original.id,
-                        "detail",
-                      )}
-                      fz="lg"
-                      c="blue.7"
-                      underline="not-hover"
-                    >
-                      {props.getValue()}
-                    </Anchor>
-                    <section className={dtStyles.default.cellIconsRow}>
-                      <CopyIcon copyText={props.getValue()} />
-                      <Link
-                        href={routes.admin.user.withId(
-                          props.row.original.id,
-                          "update",
-                        )}
-                      >
-                        <EditIcon />
-                      </Link>
-                      <DeleteModalIcon
-                        resource="User"
-                        identifier={`${props.row.original.email} (id: ${props.row.original.id})`}
-                        deleteAction={async () => {
-                          const result = await deleteUserServerAction(
-                            props.row.original?.id,
-                          );
-                          return result;
-                        }}
-                        data-test-cy="delete-user-button"
-                      />
-                    </section>
-                  </TableCell>
-                </>
+                    <EditIcon />
+                  </Link>
+
+                  <DeleteModalIcon
+                    deleteAction={async () => {
+                      const result = await deleteUserServerAction(
+                        props.row.original?.id,
+                      );
+                      return result;
+                    }}
+                    textProps={{ "data-test-cy": "delete-user-button" }}
+                  >
+                    <Text>
+                      User: {props.row.original.email} will be permanently
+                      deleted.
+                    </Text>
+                  </DeleteModalIcon>
+                </Flex>
               )}
             </>
           );
@@ -106,9 +94,7 @@ export function UserTable({ users }: { users: TUserPublic[] }) {
         accessorKey: "role",
         id: "role",
         header: "Role",
-        cell: (props) => (
-          <div className={dtStyles.default.cell}>{props.getValue()}</div>
-        ),
+        cell: (props) => <span>{props.getValue()}</span>,
         footer: "Role",
       },
       {
@@ -118,9 +104,9 @@ export function UserTable({ users }: { users: TUserPublic[] }) {
         cell: (props) => {
           const emailVerified = props.row.original.emailVerified;
           return (
-            <div className={dtStyles.default.cell}>
+            <span>
               <Checkbox checked={emailVerified} onChange={() => {}} />
-            </div>
+            </span>
           );
         },
         footer: "Verified",
@@ -136,10 +122,15 @@ export function UserTable({ users }: { users: TUserPublic[] }) {
   }, []);
 
   return (
-    <DataTable
+    <DataTableWrapper
       key="admin-user-table"
       columns={columns}
-      data={data}
+      data={users}
+      deleteModalContent={
+        <Text c={"red"} fw={"bold"}>
+          Selected user[s] will be deleted permanently.
+        </Text>
+      }
       rowSelectionAction={async (ids) => {
         if (ids.length === 0) return { status: "error" };
         const result = await deleteManyUsersServerAction(ids);

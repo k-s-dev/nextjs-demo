@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Divider } from "@mantine/core";
-import FormError from "@/lib/components/form/FormError";
-import FormMessage from "@/lib/components/form/FormMessage";
 import { createUserClientAction } from "./actions/clientAction";
 import {
   MODEL_NAME,
@@ -20,6 +18,7 @@ import AdminCreateFormLinks, {
   IAdminCreateFormLinksProps,
 } from "@/lib/features/admin/ui/form/create/AdminCreateFormLinks";
 import AdminCreateFormHeader from "@/lib/features/admin/ui/form/create/AdminCreateFormHeader";
+import FormMessages from "@/lib/ui/form/FormMessages";
 
 export default function UserCreateForm({
   formId = `user-create-form`,
@@ -69,8 +68,8 @@ export default function UserCreateForm({
         imageFile={imageFile}
         setImageFileAction={setImageFile}
       />
-      <FormError errors={formState.errors?.root} />
-      <FormMessage messages={formState.messages} />
+      <FormMessages error messages={formState.errors?.root} />
+      <FormMessages messages={formState.messages} />
       <Divider size="md" my="sm" />
       <AdminCreateFormLinks {...linksProps} />
     </AdminFormContainer>

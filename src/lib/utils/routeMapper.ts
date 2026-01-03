@@ -18,7 +18,6 @@ export const routes = {
   authentication: {
     signUp: "/signUp",
     signIn: "/signIn",
-    // signOut: "/signOut",
     verifyEmail: "/verify-email",
     resetPassword: "/reset-password",
     authError: "/error",
@@ -30,15 +29,36 @@ export const routes = {
       root: "/admin/user",
       create: "/admin/user/create",
       read: "/admin/user/list",
-      withId(id: string, suffix: "detail" | "update" | "delete") {
+      withId(id: string, suffix: TRouteSuffix) {
         return `/admin/user/${id}/${suffix}`;
       },
     },
     account: {
       read: "/admin/account/list",
-      withId(id: string, suffix: "detail" | "update" | "delete") {
+      withId(id: string, suffix: TRouteSuffix) {
         return `/admin/user/${id}/${suffix}`;
       },
+    },
+  },
+
+  org: {
+    root: "/org",
+    tasks: {
+      root: "/org/tasks",
+      settings: {
+        root: "/org/tasks/settings"
+      },
+      workspace: {
+        withId(id: string, suffix?: TRouteSuffix) {
+          return `/org/tasks/workspace/${id}${suffix ? "/" + suffix : ""}`;
+        },
+      },
+    },
+    timer: {
+      root: "/org/timer",
+    },
+    counter: {
+      root: "/org/counter",
     },
   },
 
@@ -69,3 +89,5 @@ export const routes = {
 
   DEFAULT_LOGIN_REDIRECT: "/",
 };
+
+export type TRouteSuffix = "detail" | "update" | "delete" | string;

@@ -1,14 +1,14 @@
 import { Checkbox, SelectProps } from "@mantine/core";
-import { SelectSingle } from "@/lib/components/form/fields/SelectSingle";
+import { SelectSingle } from "@/lib/ui/form/fields/SelectSingle";
 import {
   InputPassword,
   InputPasswordProps,
-} from "@/lib/components/form/fields/InputPassword";
+} from "@/lib/ui/form/fields/InputPassword";
 import {
   InputText,
   InputTextProps,
-} from "@/lib/components/form/fields/InputText";
-import { InputDateTimeProps } from "@/lib/components/form/fields/InputDateTime";
+} from "@/lib/ui/form/fields/InputText";
+import { InputDateTimeProps } from "@/lib/ui/form/fields/InputDateTime";
 import { TUserFormState, userRoleEnum } from "../definitions";
 
 export function UserEmail({ formId, formState, ...props }: UserTextFieldProps) {

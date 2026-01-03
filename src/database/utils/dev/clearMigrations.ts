@@ -1,6 +1,7 @@
 // clear dev.db, generated prisma client
 
-import { rm } from "node:fs/promises";
+import { rm, stat } from "node:fs/promises";
+import { glob } from "glob";
 import path from "node:path";
 
 const paths = {
@@ -14,8 +15,12 @@ const paths = {
 };
 
 async function clearPaths() {
-  await rm(paths.migrations, { recursive: true, force: true });
+  for (const entry of await glob.glob(`${paths.migrations}/**/*`)) {
+    const stats = await stat(entry);
+    if (stats.isDirectory() && !entry.includes("0_init")) {
+      await rm(paths.migrations, { recursive: true, force: true });
+    }
+  }
 }
 
 clearPaths();
-

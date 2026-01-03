@@ -2,7 +2,10 @@
 
 import prisma from "@/database/prismaClient";
 import { DbError } from "@/lib/utils/errors";
-import { TDataRequestMode, TServerResponsePromise } from "@/lib/utils/types";
+import {
+  TDataRequestMode,
+  TServerResponsePromise,
+} from "@/lib/types/serverResponse";
 import { TUserPublic } from "./definitions";
 import { Prisma } from "@/generated/prisma/client";
 import { checkPermissions } from "./permissions";

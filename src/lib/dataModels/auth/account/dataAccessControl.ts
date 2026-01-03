@@ -1,11 +1,11 @@
 "use server";
 
 import { Prisma } from "@/generated/prisma/client";
-import { TDataRequestMode } from "@/lib/utils/types";
 import { TUserPublic } from "../user/definitions";
 import prisma from "@/database/prismaClient";
 import { DbError } from "@/lib/utils/errors";
 import { checkPermissionsAttributes } from "../permissions";
+import { TDataRequestMode } from "@/lib/types/serverResponse";
 
 export async function updateAccountByEmail(
   email: string,

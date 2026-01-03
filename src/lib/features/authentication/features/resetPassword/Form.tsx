@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useActionState } from "react";
+import { useActionState } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import FormError from "@/lib/components/form/FormError";
-import FormMessage from "@/lib/components/form/FormMessage";
 import {
   TUserFormState,
   TUserFormStateData,
@@ -15,8 +13,9 @@ import {
   UserConfirmPassword,
   UserPassword,
 } from "@/lib/dataModels/auth/user/ui/Fields";
-import Form from "@/lib/components/form/Form";
+import Form from "@/lib/ui/form/Form";
 import { Button } from "@mantine/core";
+import FormMessages from "@/lib/ui/form/FormMessages";
 
 export default function ResetPasswordForm({
   token,
@@ -70,8 +69,8 @@ export default function ResetPasswordForm({
           Save
         </Button>
       </Form>
-      <FormError errors={formErrors} />
-      <FormMessage messages={formState.messages} />
+      <FormMessages error messages={formErrors} />
+      <FormMessages messages={formState.messages} />
     </>
   );
 }

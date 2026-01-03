@@ -1,5 +1,5 @@
 import { routes } from "@/lib/utils/routeMapper";
-import LinkButton from "@/lib/components/LinkButton";
+import LinkButton from "@/lib/ui/LinkButton";
 import { ButtonProps } from "@mantine/core";
 
 export default function SignInLinkButton({

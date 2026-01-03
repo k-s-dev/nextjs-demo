@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { ERROR_MESSAGES } from "@/lib/constants/others";
 import { routes } from "@/lib/utils/routeMapper";
 
 beforeEach(() => {
@@ -32,7 +33,7 @@ describe("admin.user.update flow", () => {
       cy.get<string>("@user01UrlUpdate").then((url) => {
         cy.visit(url);
       });
-      cy.contains("Unauthorized").should("exist");
+      cy.contains(ERROR_MESSAGES.unauthorized).should("exist");
     },
   );
 

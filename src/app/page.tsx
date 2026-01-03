@@ -1,14 +1,14 @@
 "use server";
 
-import Navbar from "@/lib/components/nav/Navbar";
+import Navbar from "@/lib/ui/nav/Navbar";
 import styles from "./page.module.scss";
 import { Button } from "@mantine/core";
 import Link from "next/link";
-import AppShellHome from "@/lib/components/layout/home/AppShell";
+import AppShell from "@/lib/ui/layout/01/AppShell";
 
 export default async function Page() {
   return (
-    <AppShellHome nav={<Navbar />}>
+    <AppShell nav={<Navbar />}>
       <main className={styles.mainContainer}>
         <header className={styles.mainHeader}>
           <h1>Nextjs App Template</h1>
@@ -30,7 +30,7 @@ export default async function Page() {
           </section>
         </section>
       </main>
-    </AppShellHome>
+    </AppShell>
   );
 }
 

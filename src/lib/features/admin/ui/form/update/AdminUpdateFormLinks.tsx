@@ -2,7 +2,7 @@
 
 import { Button } from "@mantine/core";
 import AdminFormLinksContainer from "../AdminFormLinksContainer";
-import LinkButton from "@/lib/components/LinkButton";
+import LinkButton from "@/lib/ui/LinkButton";
 
 export default function AdminUpdateFormLinks(
   props: IAdminUpdateFormLinksProps,

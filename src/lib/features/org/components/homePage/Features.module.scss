@@ -1,0 +1,15 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: stretch;
+  gap: fn-space(2);
+  width: 70%;
+
+  @include media-phone {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,15 +1,20 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { routes } from "@/lib/utils/routeMapper";
 import { authClient } from "../../auth-client";
+import { useSessionContext } from "@/lib/ui/providers/SessionProvider";
 
 export default function SignOut({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const sessionCtx = useSessionContext();
+
   return (
     <div
       onClick={async () => {
         await authClient.signOut();
-        redirect(routes.DEFAULT_LOGIN_REDIRECT);
+        sessionCtx.setSession(null);
+        router.push(routes.DEFAULT_LOGIN_REDIRECT);
       }}
     >
       {children}

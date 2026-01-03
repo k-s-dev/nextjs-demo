@@ -1,0 +1,17 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.activeTimersContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: fn-space(2);
+
+  @include media-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-phone {
+    grid-template-columns: 1fr;
+  }
+}

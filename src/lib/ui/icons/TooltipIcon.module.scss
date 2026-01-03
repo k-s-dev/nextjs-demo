@@ -1,0 +1,9 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.container {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}

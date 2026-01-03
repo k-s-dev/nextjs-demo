@@ -4,7 +4,10 @@ import * as v from "valibot";
 
 import { VSSignInFormBase } from "../../definitions";
 import { parseFormData } from "@/lib/utils/form";
-import { TUserFormState, TUserPublic } from "@/lib/dataModels/auth/user/definitions";
+import {
+  TUserFormState,
+  TUserPublic,
+} from "@/lib/dataModels/auth/user/definitions";
 import { getUserByEmail } from "@/lib/dataModels/auth/user/dataAccessControl";
 import { auth } from "@/lib/features/authentication/auth";
 import { routes } from "@/lib/utils/routeMapper";
@@ -23,6 +26,8 @@ export async function sendVerificationLinkActionServer(
   if (!validationResult.success) {
     const errors = v.flatten<typeof VSSignInFormBase>(validationResult.issues);
     return {
+      touched: true,
+      action: "verify",
       data: parsedFormData,
       errors: errors,
     };
@@ -39,6 +44,8 @@ export async function sendVerificationLinkActionServer(
   // validate: existing user
   if (!user) {
     return {
+      touched: true,
+      action: "verify",
       data: parsedFormData,
       errors: {
         root: ["Invalid credentials."],
@@ -48,6 +55,8 @@ export async function sendVerificationLinkActionServer(
 
   if (user.emailVerified) {
     return {
+      touched: true,
+      action: "verify",
       data: parsedFormData,
       messages: ["Email already verified."],
     };
@@ -62,12 +71,16 @@ export async function sendVerificationLinkActionServer(
   });
   if (data.status) {
     return {
+      touched: true,
+      action: "verify",
       data: parsedFormData,
       messages: [`Email verfication link sent to "${user.email}".`],
     };
   }
 
   return {
+    touched: true,
+    action: "verify",
     data: parsedFormData,
     messages: ["Failed to send email verification link, please try again."],
   };

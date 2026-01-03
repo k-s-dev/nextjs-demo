@@ -1,0 +1,71 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.root,
+.main,
+.left {
+  display: none;
+}
+
+.root {
+  @include media-phone-up {
+    display: grid;
+    grid-template-columns: minmax(auto, 300px) 1fr;
+    grid-template-areas: "left main";
+
+    &LeftCollapsed {
+      grid-template-columns: 50px 1fr;
+    }
+
+    // independent scroll
+    height: calc(100vh - $nav-height);
+    overflow: hidden;
+
+    .main,
+    .left {
+      display: block;
+      margin: 0;
+      padding: 1rem;
+      border-right: 1px solid var(--color-2);
+
+      // independent scroll
+      overflow-y: auto;
+    }
+
+    .sidebar {
+      min-height: calc(100vh - $nav-height - 75px);
+
+      &Content {
+        flex-grow: 1;
+      }
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .left {
+      position: relative;
+    }
+
+    .toggle {
+      position: absolute;
+      right: -8;
+      cursor: pointer;
+      text-align: center;
+
+      &Top {
+        top: 5;
+      }
+
+      &Bottom {
+        bottom: 5;
+      }
+
+      &Closed {
+        right: auto;
+      }
+    }
+  }
+}

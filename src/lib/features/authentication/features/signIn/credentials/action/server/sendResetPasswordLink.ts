@@ -4,7 +4,10 @@ import * as v from "valibot";
 
 import { VSSignInFormBase } from "../../definitions";
 import { parseFormData } from "@/lib/utils/form";
-import { TUserFormState, TUserPublic } from "@/lib/dataModels/auth/user/definitions";
+import {
+  TUserFormState,
+  TUserPublic,
+} from "@/lib/dataModels/auth/user/definitions";
 import { getUserByEmail } from "@/lib/dataModels/auth/user/dataAccessControl";
 import { auth } from "@/lib/features/authentication/auth";
 import { routes } from "@/lib/utils/routeMapper";
@@ -23,6 +26,8 @@ export async function sendResetPasswordLinkActionServer(
   if (!validationResult.success) {
     const errors = v.flatten<typeof VSSignInFormBase>(validationResult.issues);
     return {
+      touched: true,
+      action: "reset",
       data: parsedFormData,
       errors: errors,
     };
@@ -39,6 +44,8 @@ export async function sendResetPasswordLinkActionServer(
   // validate: existing user
   if (!user) {
     return {
+      touched: true,
+      action: "reset",
       data: parsedFormData,
       errors: {
         root: ["Invalid credentials."],
@@ -49,6 +56,8 @@ export async function sendResetPasswordLinkActionServer(
   // validate: verification status
   if (!user?.emailVerified) {
     return {
+      touched: true,
+      action: "reset",
       data: parsedFormData,
       errors: {
         root: ["Email is not verified yet."],
@@ -65,6 +74,8 @@ export async function sendResetPasswordLinkActionServer(
   });
 
   return {
+    touched: true,
+    action: "reset",
     data: parsedFormData,
     messages: [data.message],
   };

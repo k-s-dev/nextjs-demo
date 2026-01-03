@@ -5,5 +5,7 @@
 @use "../../functions" as *;
 
 @mixin typography-variables {
-  --line-height-base: fn-line-height(6);
+  & {
+    --line-height-base: fn-line-height(6);
+  }
 }

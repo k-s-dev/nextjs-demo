@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.category {
+  flex-grow: 0;
+}
+
+.title {
+  flex-grow: 9;
+}

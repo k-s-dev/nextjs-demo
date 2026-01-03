@@ -1,0 +1,14 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr;
+  gap: fn-space(2);
+  max-width: 500px;
+
+  @include media-phone {
+    grid-template-columns: 1fr;
+  }
+}

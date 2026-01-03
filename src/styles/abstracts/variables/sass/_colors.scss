@@ -1,4 +1,5 @@
-@use 'sass:color';
+@use "sass:color";
+@use "sass:meta";
 
 // https://getbootstrap.com/docs/5.3/customize/color/
 
@@ -14,10 +15,13 @@
 
 // Shade the color if the weight is positive, else tint it
 @function shift-color($color, $weight) {
-  @return if($weight > 0, shade-color($color, $weight), tint-color($color, -$weight));
+  @return if(
+    sass($weight > 0): shade-color($color, $weight) ;
+      else: tint-color($color, -$weight)
+  );
 }
 
-$white:    #fff !default;
+$white: #fff !default;
 $grey-100: #f8f9fa !default;
 $grey-200: #e9ecef !default;
 $grey-300: #dee2e6 !default;
@@ -27,7 +31,7 @@ $grey-600: #6c757d !default;
 $grey-700: #495057 !default;
 $grey-800: #343a40 !default;
 $grey-900: #212529 !default;
-$black:    #000 !default;
+$black: #000 !default;
 
 $greys: (
   "100": $grey-100,
@@ -38,36 +42,35 @@ $greys: (
   "600": $grey-600,
   "700": $grey-700,
   "800": $grey-800,
-  "900": $grey-900
+  "900": $grey-900,
 ) !default;
 
-$blue:    #376ad1 !default;
-$indigo:  #6358bc !default;
-$purple:  #6f42c1 !default;
-$pink:    #e93c2d !default;
-$red:     #c05658 !default;
-$orange:  #F4A261 !default;
-$yellow:  #E9C46A !default;
-$green:   #a8bf77 !default;
-$teal:    #61b8a6 !default;
-$cyan:    #0dcaf0 !default;
-
+$blue: #376ad1 !default;
+$indigo: #6358bc !default;
+$purple: #6f42c1 !default;
+$pink: #e93c2d !default;
+$red: #c05658 !default;
+$orange: #f4a261 !default;
+$yellow: #e9c46a !default;
+$green: #a8bf77 !default;
+$teal: #61b8a6 !default;
+$cyan: #0dcaf0 !default;
 
 $colors-map: (
-  "blue":       $blue,
-  "indigo":     $indigo,
-  "purple":     $purple,
-  "pink":       $pink,
-  "red":        $red,
-  "orange":     $orange,
-  "yellow":     $yellow,
-  "green":      $green,
-  "teal":       $teal,
-  "cyan":       $cyan,
-  "black":      $black,
-  "white":      $white,
-  "grey":       $grey-600,
-  "grey-dark":  $grey-800
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "black": $black,
+  "white": $white,
+  "grey": $grey-600,
+  "grey-dark": $grey-800,
 ) !default;
 
 $blue-100: tint-color($blue, 80%) !default;
@@ -179,7 +182,7 @@ $blues: (
   "blue-600": $blue-600,
   "blue-700": $blue-700,
   "blue-800": $blue-800,
-  "blue-900": $blue-900
+  "blue-900": $blue-900,
 ) !default;
 
 $indigos: (
@@ -191,7 +194,7 @@ $indigos: (
   "indigo-600": $indigo-600,
   "indigo-700": $indigo-700,
   "indigo-800": $indigo-800,
-  "indigo-900": $indigo-900
+  "indigo-900": $indigo-900,
 ) !default;
 
 $purples: (
@@ -203,7 +206,7 @@ $purples: (
   "purple-600": $purple-600,
   "purple-700": $purple-700,
   "purple-800": $purple-800,
-  "purple-900": $purple-900
+  "purple-900": $purple-900,
 ) !default;
 
 $pinks: (
@@ -215,7 +218,7 @@ $pinks: (
   "pink-600": $pink-600,
   "pink-700": $pink-700,
   "pink-800": $pink-800,
-  "pink-900": $pink-900
+  "pink-900": $pink-900,
 ) !default;
 
 $reds: (
@@ -227,7 +230,7 @@ $reds: (
   "red-600": $red-600,
   "red-700": $red-700,
   "red-800": $red-800,
-  "red-900": $red-900
+  "red-900": $red-900,
 ) !default;
 
 $oranges: (
@@ -239,7 +242,7 @@ $oranges: (
   "orange-600": $orange-600,
   "orange-700": $orange-700,
   "orange-800": $orange-800,
-  "orange-900": $orange-900
+  "orange-900": $orange-900,
 ) !default;
 
 $yellows: (
@@ -251,7 +254,7 @@ $yellows: (
   "yellow-600": $yellow-600,
   "yellow-700": $yellow-700,
   "yellow-800": $yellow-800,
-  "yellow-900": $yellow-900
+  "yellow-900": $yellow-900,
 ) !default;
 
 $greens: (
@@ -263,7 +266,7 @@ $greens: (
   "green-600": $green-600,
   "green-700": $green-700,
   "green-800": $green-800,
-  "green-900": $green-900
+  "green-900": $green-900,
 ) !default;
 
 $teals: (
@@ -275,7 +278,7 @@ $teals: (
   "teal-600": $teal-600,
   "teal-700": $teal-700,
   "teal-800": $teal-800,
-  "teal-900": $teal-900
+  "teal-900": $teal-900,
 ) !default;
 
 $cyans: (
@@ -287,52 +290,52 @@ $cyans: (
   "cyan-600": $cyan-600,
   "cyan-700": $cyan-700,
   "cyan-800": $cyan-800,
-  "cyan-900": $cyan-900
+  "cyan-900": $cyan-900,
 ) !default;
 
-$primary:       $blue !default;
-$secondary:     $grey-600 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $grey-100 !default;
-$dark:          $grey-900 !default;
+$primary: $blue !default;
+$secondary: $grey-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $grey-100 !default;
+$dark: $grey-900 !default;
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
 ) !default;
 
-$primary-text-emphasis:   shade-color($primary, 60%) !default;
+$primary-text-emphasis: shade-color($primary, 60%) !default;
 $secondary-text-emphasis: shade-color($secondary, 60%) !default;
-$success-text-emphasis:   shade-color($success, 60%) !default;
-$info-text-emphasis:      shade-color($info, 60%) !default;
-$warning-text-emphasis:   shade-color($warning, 60%) !default;
-$danger-text-emphasis:    shade-color($danger, 60%) !default;
-$light-text-emphasis:     $grey-700 !default;
-$dark-text-emphasis:      $grey-700 !default;
+$success-text-emphasis: shade-color($success, 60%) !default;
+$info-text-emphasis: shade-color($info, 60%) !default;
+$warning-text-emphasis: shade-color($warning, 60%) !default;
+$danger-text-emphasis: shade-color($danger, 60%) !default;
+$light-text-emphasis: $grey-700 !default;
+$dark-text-emphasis: $grey-700 !default;
 
-$primary-bg-subtle:       tint-color($primary, 80%) !default;
-$secondary-bg-subtle:     tint-color($secondary, 80%) !default;
-$success-bg-subtle:       tint-color($success, 80%) !default;
-$info-bg-subtle:          tint-color($info, 80%) !default;
-$warning-bg-subtle:       tint-color($warning, 80%) !default;
-$danger-bg-subtle:        tint-color($danger, 80%) !default;
-$light-bg-subtle:         color.mix($grey-100, $white) !default;
-$dark-bg-subtle:          $grey-400 !default;
+$primary-bg-subtle: tint-color($primary, 80%) !default;
+$secondary-bg-subtle: tint-color($secondary, 80%) !default;
+$success-bg-subtle: tint-color($success, 80%) !default;
+$info-bg-subtle: tint-color($info, 80%) !default;
+$warning-bg-subtle: tint-color($warning, 80%) !default;
+$danger-bg-subtle: tint-color($danger, 80%) !default;
+$light-bg-subtle: color.mix($grey-100, $white) !default;
+$dark-bg-subtle: $grey-400 !default;
 
-$primary-border-subtle:   tint-color($primary, 60%) !default;
+$primary-border-subtle: tint-color($primary, 60%) !default;
 $secondary-border-subtle: tint-color($secondary, 60%) !default;
-$success-border-subtle:   tint-color($success, 60%) !default;
-$info-border-subtle:      tint-color($info, 60%) !default;
-$warning-border-subtle:   tint-color($warning, 60%) !default;
-$danger-border-subtle:    tint-color($danger, 60%) !default;
-$light-border-subtle:     $grey-200 !default;
-$dark-border-subtle:      $grey-500 !default;
+$success-border-subtle: tint-color($success, 60%) !default;
+$info-border-subtle: tint-color($info, 60%) !default;
+$warning-border-subtle: tint-color($warning, 60%) !default;
+$danger-border-subtle: tint-color($danger, 60%) !default;
+$light-border-subtle: $grey-200 !default;
+$dark-border-subtle: $grey-500 !default;

@@ -1,0 +1,13 @@
+@use "sass:map";
+
+@use "@/styles/abstracts/" as *;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: fn-space(1);
+
+  padding: fn-space(2) fn-space(5);
+}

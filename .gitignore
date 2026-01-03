@@ -7,6 +7,9 @@ cypress/videos/
 src/generated/
 *.db
 
+## generic
+.trials/
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

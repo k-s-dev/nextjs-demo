@@ -34,7 +34,7 @@ describe("admin.user.delete flow", () => {
     {
       retries: {
         runMode: 4,
-        openMode: 4,
+        openMode: 0,
       },
     },
     () => {
@@ -74,7 +74,7 @@ describe("admin.user.delete flow", () => {
     {
       retries: {
         runMode: 4,
-        openMode: 4,
+        openMode: 0,
       },
     },
     () => {

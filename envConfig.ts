@@ -1,4 +1,4 @@
-import { loadEnvConfig } from '@next/env'
- 
-const projectDir = process.cwd()
-loadEnvConfig(projectDir)
+import pkg from "@next/env";
+const { loadEnvConfig } = pkg;
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);

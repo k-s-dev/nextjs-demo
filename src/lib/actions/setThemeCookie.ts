@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { TThemes } from "../components/nav/theme/NavThemeToggleButton";
+import { TThemes } from "@/lib/ui/nav/theme/NavThemeToggleButton";
 
 export async function setThemeCookieAction(
   themeName: TThemes,

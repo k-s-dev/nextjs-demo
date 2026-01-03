@@ -4,9 +4,16 @@
 @use "../sass" as *;
 @use "../../mixins" as *;
 @use "../../functions" as *;
+@use "../../utilities" as *;
 
 @mixin sizing-variables {
-  // rem calculations are based on html font size
-  --html-font-size: 100%;
-  --body-font-size: fn-font-size(5); // ~ 16px
+  & {
+    // rem calculations are based on html font size
+    --html-font-size: 15px;
+    --body-font-size: fn-font-size(5); // ~ 16px
+  }
+
+  @include media-phone {
+    --html-font-size: 14px;
+  }
 }

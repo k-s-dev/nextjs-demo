@@ -1,7 +1,9 @@
 @use "../sass" as *;
 
 @mixin image-variables {
+  & {
     /* For dark mode */
-  --image-grayscale: 0;
-  --image-opacity: 100%;
+    --image-grayscale: 0;
+    --image-opacity: 100%;
+  }
 }

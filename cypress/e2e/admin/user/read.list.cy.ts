@@ -1,3 +1,4 @@
+import { ERROR_MESSAGES } from "@/lib/constants/others";
 import { routes } from "@/lib/utils/routeMapper";
 
 describe("admin.user.read flow", () => {
@@ -11,7 +12,7 @@ describe("admin.user.read flow", () => {
     cy.visit(routes.authentication.signIn);
     cy.confirmSignIn("test-user-02@example.com", "12345678");
     cy.visit(routes.admin.user.read);
-    cy.contains("Unauthorized").should("exist");
+    cy.contains(ERROR_MESSAGES.unauthorized).should("exist");
   });
 
   it("should navigate to user/list page with superuser authentication", () => {
